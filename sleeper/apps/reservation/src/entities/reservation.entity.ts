@@ -19,7 +19,7 @@ export class Reservation {
     // user: User;
 
     @Column()
-    userID: string;
+    userId: string;
 
     @Column()
     placeId: string;
