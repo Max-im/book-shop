@@ -1,0 +1,30 @@
+services:
+  reservation:
+    build:
+      context: .
+      dockerfile: ./apps/reservation/Dockerfile
+      target: development
+    command: npm run start:dev reservation
+    ports:
+      - '3000:3000'
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    container_name: db
+    restart: always
+    shm_size: 128mb
+    ports:
+      - '5433:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=reservation
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
