@@ -6,31 +6,31 @@ import { ReservationRepository } from './reservation.repository';
 
 @Injectable()
 export class ReservationService {
-  constructor(
-    // @InjectRepository(ReservationRepository)
-    private readonly repository: ReservationRepository
-  ) {}
+    constructor(
+        // @InjectRepository(ReservationRepository)
+        private readonly repository: ReservationRepository,
+    ) {}
 
-  async create(createReservationDto: CreateReservationDto) {
-    const reservation = new Reservation();
-    Object.assign(reservation, { ...createReservationDto, userId: '123' });
-    await this.repository.saveReservation(reservation);
-    return reservation;
-  }
+    async create(createReservationDto: CreateReservationDto) {
+        const reservation = new Reservation();
+        Object.assign(reservation, { ...createReservationDto, userId: '123' });
+        await this.repository.saveReservation(reservation);
+        return reservation;
+    }
 
-  async findAll() {
-    return await this.repository.findAll();
-  }
+    async findAll() {
+        return await this.repository.findAll();
+    }
 
-  findOne(id: number) {
-    return `This action returns a #${id} reservation`;
-  }
+    findOne(id: number) {
+        return `This action returns a #${id} reservation`;
+    }
 
-  update(id: number, updateReservationDto: UpdateReservationDto) {
-    return `This action updates a #${id} reservation`;
-  }
+    update(id: number, updateReservationDto: UpdateReservationDto) {
+        return `This action updates a #${id} reservation`;
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} reservation`;
-  }
+    remove(id: number) {
+        return `This action removes a #${id} reservation`;
+    }
 }

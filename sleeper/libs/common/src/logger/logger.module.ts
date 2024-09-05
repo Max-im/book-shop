@@ -5,11 +5,11 @@ import { LoggerModule as NestLoggerModule } from 'nestjs-pino';
     imports: [
         NestLoggerModule.forRoot({
             pinoHttp: {
-              transport: {
-                target: 'pino-pretty'
-              }
-            }
-          }),
-    ]
+                transport: {
+                    target: 'pino-pretty',
+                },
+            },
+        }),
+    ],
 })
 export class LoggerModule {}

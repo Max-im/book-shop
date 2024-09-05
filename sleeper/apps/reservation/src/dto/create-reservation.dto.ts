@@ -9,11 +9,11 @@ export class CreateReservationDto {
     @Type(() => Date)
     @IsDate()
     readonly endDate: Date;
-    
+
     @IsString()
     @IsNotEmpty()
     readonly placeId: string;
-    
+
     @IsString()
     @IsNotEmpty()
     readonly invoiceId: string;

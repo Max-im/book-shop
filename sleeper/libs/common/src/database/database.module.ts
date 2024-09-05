@@ -20,8 +20,8 @@ import { ConfigModule } from '../config/config.module';
                 retryDelay: 3000,
                 autoLoadEntities: true,
             }),
-            inject: [ConfigService]
-    }),
+            inject: [ConfigService],
+        }),
     ],
 })
 export class DatabaseModule {}
