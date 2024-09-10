@@ -7,7 +7,7 @@ import { ReservationService } from './reservation.service';
 import { ReservationController } from './reservation.controller';
 import { Reservation } from './entities/reservation.entity';
 import { ReservationRepository } from './reservation.repository';
-import { User } from 'apps/auth/src/user/entities/user.entity';
+import { User } from 'apps/auth/src/entities/user.entity';
 
 @Module({
     imports: [
