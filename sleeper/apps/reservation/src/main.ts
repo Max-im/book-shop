@@ -9,6 +9,7 @@ async function bootstrap() {
     app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
     app.useLogger(app.get(Logger));
     const configService = app.get(ConfigService);
+    console.log(configService.get('HOST'));
     await app.listen(configService.get('PORT'));
 }
 bootstrap();

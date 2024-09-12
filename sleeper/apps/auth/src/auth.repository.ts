@@ -3,9 +3,9 @@ import { DataSource, Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 
 @Injectable()
-export class UserRepository {
+export class AuthRepository {
     private readonly repository: Repository<User>;
-    protected readonly logger = new Logger(UserRepository.name);
+    protected readonly logger = new Logger(AuthRepository.name);
 
     constructor(private dataSource: DataSource) {
         this.repository = this.dataSource.getRepository(User);
@@ -13,5 +13,9 @@ export class UserRepository {
 
     create(user: User) {
         return this.repository.save(user);
+    }
+
+    getByEmail(email: string) {
+        return this.repository.findOneBy({ email });
     }
 }

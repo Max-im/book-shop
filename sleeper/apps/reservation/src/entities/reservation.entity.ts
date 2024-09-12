@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 import { IsString, IsDate } from 'class-validator';
-import { User } from 'apps/auth/src/user/entities/user.entity';
+import { User } from 'apps/auth/src/entities/user.entity';
 
 @Entity({ name: 'reservations' })
 export class Reservation {
@@ -19,12 +19,8 @@ export class Reservation {
     @IsDate()
     endDate: Date;
 
-    @ManyToOne(() => User, (user) => user.reservations)
+    @ManyToOne(() => User, (user) => user.reservations, { eager: true })
     user: User;
-
-    // @Column()
-    // // @IsString()
-    // userId: string;
 
     @Column()
     @IsString()
