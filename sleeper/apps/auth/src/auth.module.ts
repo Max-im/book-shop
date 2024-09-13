@@ -7,6 +7,7 @@ import { AuthService } from './auth.service';
 import { DatabaseModule, LoggerModule } from '@app/common';
 import { ConfigService } from '@nestjs/config';
 import { LocalStrategy } from './strategies/local.strategy';
+import { JwtStrategy } from './strategies/jwt.strategy';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Reservation } from 'apps/reservation/src/entities/reservation.entity';
@@ -41,6 +42,6 @@ import { AuthRepository } from './auth.repository';
         }),
     ],
     controllers: [AuthController],
-    providers: [AuthService, AuthRepository, LocalStrategy],
+    providers: [AuthService, AuthRepository, LocalStrategy, JwtStrategy],
 })
 export class AuthModule {}

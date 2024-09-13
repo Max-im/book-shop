@@ -1,25 +1,13 @@
-import { pbkdf2Sync } from 'crypto';
 import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AuthRepository } from './auth.repository';
-
-const hashPassword = (password, salt) => {
-    const hash = pbkdf2Sync(password, salt, 1000, 64, 'sha512');
-    return hash.toString('hex');
-};
-
-const compare = (plainPassword, storedHash, salt) => {
-    const hash = hashPassword(plainPassword, salt);
-    return hash === storedHash;
-};
+import { ITokenDto } from './dto/token.dto';
 
 @Injectable()
 export class AuthService {
     constructor(
-        private readonly configService: ConfigService,
         private readonly jwtService: JwtService,
         private readonly repository: AuthRepository,
     ) {}
@@ -42,45 +30,13 @@ export class AuthService {
         }
     }
 
-    async validateUser(email: string, password: string) {
-        const errorMessage = 'Email or password are incorrect';
-        const user = await this.repository.getByEmail(email);
-
-        if (!user) {
-            throw new UnauthorizedException(errorMessage);
-        }
-
-        const isCorrectPassword = await compare(password, user.password, user.salt);
-        if (!isCorrectPassword) {
-            throw new UnauthorizedException(errorMessage);
-        }
-
-        delete user.password;
-        delete user.salt;
-        return user;
-    }
-
     login(user: User) {
-        const payload = {
+        const payload: ITokenDto = {
             id: user.id,
+            email: user.email,
         };
-        const expires = new Date();
-        expires.setSeconds(expires.getSeconds() + this.configService.get('JWT_EXPERATION'));
 
         const token = this.jwtService.sign(payload);
-        return { token };
-        // response.cookie('Authentication', token, { httpOnly: true, expires });
+        return token;
     }
-
-    // buildResponse(user: User) {
-    //     const payload = {
-    //         id: user.id,
-    //     };
-    //     const expires = new Date();
-    //     expires.setSeconds(expires.getSeconds() + this.configService.get('JWT_EXPERATION'));
-
-    //     const token = this.jwtService.sign(payload);
-
-    //     // response.cookie('Authentication', token, { httpOnly: true, expires });
-    // }
 }

@@ -18,4 +18,8 @@ export class AuthRepository {
     getByEmail(email: string) {
         return this.repository.findOneBy({ email });
     }
+
+    getById(id: string) {
+        return this.repository.findOneBy({ id });
+    }
 }
