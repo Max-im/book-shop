@@ -19,7 +19,7 @@ import { Reservation } from 'apps/reservation/src/entities/reservation.entity';
                     entities: [User, Reservation],
                     synchronize: true,
                     retryAttempts: 10,
-                    retryDelay: 3000,
+                    retryDelay: 2500,
                     autoLoadEntities: true,
                 };
             },

@@ -11,9 +11,9 @@ export class ReservationService {
         private readonly repository: ReservationRepository,
     ) {}
 
-    async create(createReservationDto: CreateReservationDto) {
+    async create(createReservationDto: CreateReservationDto, userId: string) {
         const reservation = new Reservation();
-        Object.assign(reservation, { ...createReservationDto, userId: '123' });
+        Object.assign(reservation, { ...createReservationDto, userId });
         await this.repository.saveReservation(reservation);
         return reservation;
     }

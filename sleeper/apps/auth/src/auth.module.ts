@@ -22,6 +22,7 @@ import { AuthRepository } from './auth.repository';
             isGlobal: true,
             validationSchema: Joi.object({
                 PORT: Joi.number().required(),
+                TCP_PORT: Joi.number().required(),
                 DB_HOST: Joi.string().required(),
                 DB_PORT: Joi.string().required(),
                 DB_USER: Joi.string().required(),

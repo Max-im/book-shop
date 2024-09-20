@@ -1,13 +1,15 @@
 import * as Joi from 'joi';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { DatabaseModule, LoggerModule } from '@app/common';
 import { ReservationService } from './reservation.service';
 import { ReservationController } from './reservation.controller';
 import { Reservation } from './entities/reservation.entity';
 import { ReservationRepository } from './reservation.repository';
 import { User } from 'apps/auth/src/entities/user.entity';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { AUTH_SERVICE } from '@app/common/constants/services';
 
 @Module({
     imports: [
@@ -18,6 +20,8 @@ import { User } from 'apps/auth/src/entities/user.entity';
             isGlobal: true,
             validationSchema: Joi.object({
                 PORT: Joi.number().required(),
+                AUTH_HOST: Joi.string().required(),
+                AUTH_PORT: Joi.number().required(),
                 DB_HOST: Joi.string().required(),
                 DB_PORT: Joi.string().required(),
                 DB_USER: Joi.string().required(),
@@ -25,6 +29,16 @@ import { User } from 'apps/auth/src/entities/user.entity';
                 DB_NAME: Joi.string().required(),
             }),
         }),
+        ClientsModule.registerAsync([
+            {
+                name: AUTH_SERVICE,
+                useFactory: (configService: ConfigService) => ({
+                    transport: Transport.TCP,
+                    options: { host: configService.get('AUTH_HOST'), port: configService.get('AUTH_PORT') },
+                }),
+                inject: [ConfigService],
+            },
+        ]),
     ],
     controllers: [ReservationController],
     providers: [ReservationService, ReservationRepository],

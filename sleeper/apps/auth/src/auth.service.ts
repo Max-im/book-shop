@@ -3,7 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { AuthRepository } from './auth.repository';
-import { ITokenDto } from './dto/token.dto';
+import { IUserDto } from '@app/common';
 
 @Injectable()
 export class AuthService {
@@ -31,7 +31,7 @@ export class AuthService {
     }
 
     login(user: User) {
-        const payload: ITokenDto = {
+        const payload: IUserDto = {
             id: user.id,
             email: user.email,
         };
