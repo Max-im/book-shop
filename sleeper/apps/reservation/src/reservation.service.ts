@@ -1,14 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
 import { Reservation } from './entities/reservation.entity';
 import { ReservationRepository } from './reservation.repository';
+import { PAYMENT_SERVICE } from '@app/common';
+import { ClientProxy } from '@nestjs/microservices';
 
 @Injectable()
 export class ReservationService {
     constructor(
         // @InjectRepository(ReservationRepository)
         private readonly repository: ReservationRepository,
+        @Inject(PAYMENT_SERVICE) paymentService: ClientProxy,
     ) {}
 
     async create(createReservationDto: CreateReservationDto, userId: string) {
@@ -22,7 +25,7 @@ export class ReservationService {
         return await this.repository.findAll();
     }
 
-    findOne(id: number) {
+    async findOne(id: number) {
         return `This action returns a #${id} reservation`;
     }
 

@@ -9,7 +9,7 @@ import { Reservation } from './entities/reservation.entity';
 import { ReservationRepository } from './reservation.repository';
 import { User } from 'apps/auth/src/entities/user.entity';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { AUTH_SERVICE } from '@app/common/constants/services';
+import { AUTH_SERVICE, PAYMENT_SERVICE } from '@app/common/constants/services';
 
 @Module({
     imports: [
@@ -22,6 +22,8 @@ import { AUTH_SERVICE } from '@app/common/constants/services';
                 PORT: Joi.number().required(),
                 AUTH_HOST: Joi.string().required(),
                 AUTH_PORT: Joi.number().required(),
+                PAYMENT_HOST: Joi.string().required(),
+                PAYMENT_PORT: Joi.number().required(),
                 DB_HOST: Joi.string().required(),
                 DB_PORT: Joi.string().required(),
                 DB_USER: Joi.string().required(),
@@ -32,6 +34,14 @@ import { AUTH_SERVICE } from '@app/common/constants/services';
         ClientsModule.registerAsync([
             {
                 name: AUTH_SERVICE,
+                useFactory: (configService: ConfigService) => ({
+                    transport: Transport.TCP,
+                    options: { host: configService.get('AUTH_HOST'), port: configService.get('AUTH_PORT') },
+                }),
+                inject: [ConfigService],
+            },
+            {
+                name: PAYMENT_SERVICE,
                 useFactory: (configService: ConfigService) => ({
                     transport: Transport.TCP,
                     options: { host: configService.get('AUTH_HOST'), port: configService.get('AUTH_PORT') },
