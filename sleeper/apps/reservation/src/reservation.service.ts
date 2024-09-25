@@ -5,20 +5,28 @@ import { Reservation } from './entities/reservation.entity';
 import { ReservationRepository } from './reservation.repository';
 import { PAYMENT_SERVICE } from '@app/common';
 import { ClientProxy } from '@nestjs/microservices';
+import { map } from 'rxjs';
 
 @Injectable()
 export class ReservationService {
     constructor(
         // @InjectRepository(ReservationRepository)
         private readonly repository: ReservationRepository,
-        @Inject(PAYMENT_SERVICE) paymentService: ClientProxy,
+        @Inject(PAYMENT_SERVICE) private readonly paymentService: ClientProxy,
     ) {}
 
     async create(createReservationDto: CreateReservationDto, userId: string) {
-        const reservation = new Reservation();
-        Object.assign(reservation, { ...createReservationDto, userId });
-        await this.repository.saveReservation(reservation);
-        return reservation;
+        return await this.paymentService.send('create_charge', createReservationDto.charge).pipe(
+            map(async (response) => {
+                const reservation = new Reservation();
+                Object.assign(reservation, { ...createReservationDto, userId, invoiceId: response.id });
+                await this.repository.saveReservation(reservation);
+
+                const obj: any = { ...reservation, paymentId: response.id };
+                delete obj.charge;
+                return obj;
+            }),
+        );
     }
 
     async findAll() {

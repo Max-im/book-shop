@@ -44,7 +44,7 @@ import { AUTH_SERVICE, PAYMENT_SERVICE } from '@app/common/constants/services';
                 name: PAYMENT_SERVICE,
                 useFactory: (configService: ConfigService) => ({
                     transport: Transport.TCP,
-                    options: { host: configService.get('AUTH_HOST'), port: configService.get('AUTH_PORT') },
+                    options: { host: configService.get('PAYMENT_HOST'), port: configService.get('PAYMENT_PORT') },
                 }),
                 inject: [ConfigService],
             },

@@ -9,16 +9,14 @@ export class PaymentsService {
 
     constructor(private readonly configService: ConfigService) {}
 
-    async createCharge({ card, amount }: CreateChargeDto) {
-        const paymentMethod = await this.stripe.paymentMethods.create({ card, type: 'card' });
-        const paymentIntent = await this.stripe.paymentIntents.create({
-            payment_method: paymentMethod.id,
+    async createCharge({ token, amount }: CreateChargeDto) {
+        token = token || 'tok_visa';
+        const charge = await this.stripe.charges.create({
+            currency: 'usd',
             amount: amount * 100,
-            confirm: true,
-            payment_method_types: ['card'],
-            currency: 'USD',
+            source: token,
         });
 
-        return paymentIntent;
+        return charge;
     }
 }
