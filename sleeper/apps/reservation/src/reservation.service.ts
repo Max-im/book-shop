@@ -15,8 +15,10 @@ export class ReservationService {
         @Inject(PAYMENT_SERVICE) private readonly paymentService: ClientProxy,
     ) {}
 
-    async create(createReservationDto: CreateReservationDto, userId: string) {
-        return await this.paymentService.send('create_charge', createReservationDto.charge).pipe(
+    async create(createReservationDto: CreateReservationDto, userId: string, email: string) {
+        const payload = { ...createReservationDto.charge, email };
+
+        return await this.paymentService.send('create_charge', payload).pipe(
             map(async (response) => {
                 const reservation = new Reservation();
                 Object.assign(reservation, { ...createReservationDto, userId, invoiceId: response.id });

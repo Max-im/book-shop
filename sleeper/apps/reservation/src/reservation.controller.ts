@@ -21,7 +21,7 @@ export class ReservationController {
     @Post()
     @UseGuards(JwtCommonAuthGuard)
     create(@Body() createReservationDto: CreateReservationDto, @CurrentUser() user: IUserDto) {
-        return this.reservationService.create(createReservationDto, user.id);
+        return this.reservationService.create(createReservationDto, user.id, user.email);
     }
 
     @Get()
