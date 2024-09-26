@@ -38,10 +38,7 @@ export class ReservationController {
 
     @Patch(':id')
     @UseGuards(JwtCommonAuthGuard)
-    update(
-        @Param('id') id: string,
-        @Body() updateReservationDto: UpdateReservationDto,
-    ) {
+    update(@Param('id') id: string, @Body() updateReservationDto: UpdateReservationDto) {
         return this.reservationService.update(+id, updateReservationDto);
     }
 

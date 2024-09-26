@@ -6,6 +6,7 @@ import { ReservationRepository } from './reservation.repository';
 import { PAYMENT_SERVICE } from '@app/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { map } from 'rxjs';
+import { PaymentsCreateChargeDto } from 'apps/payments/src/dto/payment-create-charge.dto';
 
 @Injectable()
 export class ReservationService {
@@ -16,7 +17,7 @@ export class ReservationService {
     ) {}
 
     async create(createReservationDto: CreateReservationDto, userId: string, email: string) {
-        const payload = { ...createReservationDto.charge, email };
+        const payload: PaymentsCreateChargeDto = { ...createReservationDto.charge, email };
 
         return await this.paymentService.send('create_charge', payload).pipe(
             map(async (response) => {
