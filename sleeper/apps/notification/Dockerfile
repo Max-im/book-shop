@@ -10,6 +10,8 @@ RUN npm i
 COPY apps/notification apps/notification
 COPY libs libs
 
+RUN cd apps/notification && npm i
+
 RUN npm run build
 
 FROM node:alpine AS production
