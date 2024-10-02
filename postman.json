@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "e6c627c1-832b-49b0-9cf9-cc4c7d27cccd",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9212816"
+	},
+	"item": [
+		{
+			"name": "registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"emailer@gmail.com\",\r\n    \"password\": \"1Q2w3e4r5t6y-1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/auth/",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"emailer@gmail.com\",\r\n    \"password\": \"1Q2w3e4r5t6y-1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3001/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "reservation",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"placeId\": \"test-placeId\",\r\n    \"invoiceId\": \"test-invoiceId\",\r\n    \"startDate\": \"2024-09-05T15:00:00.000Z\",\r\n    \"endDate\": \"2024-09-05T15:00:00.000Z\",\r\n    \"charge\": {\r\n        \"amount\": 5.09,\r\n        \"token\": \"tok_visa\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/reservation",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"reservation"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
