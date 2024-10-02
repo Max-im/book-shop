@@ -3,16 +3,16 @@ FROM node:alpine AS development
 WORKDIR /usr/src/app
 
 COPY package*.json .
+COPY tsconfig.json tsconfig.json
 
 RUN npm i
 
-COPY . .
+COPY apps/reservation apps/reservation
+COPY libs libs
 
 RUN npm run build
 
 FROM node:alpine AS production
-
-
 
 
 ARG NODE_ENV=production

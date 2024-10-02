@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 import { Column, Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 import { IsString, IsDate } from 'class-validator';
-import { User } from 'apps/auth/src/entities/user.entity';
+import { User } from '.';
 
 @Entity({ name: 'reservations' })
 export class Reservation {

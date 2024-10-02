@@ -1,5 +1,5 @@
 import { IsEmail } from 'class-validator';
-import { CreateChargeDto } from '@app/common';
+import { CreateChargeDto } from '.';
 
 export class PaymentsCreateChargeDto extends CreateChargeDto {
     @IsEmail()

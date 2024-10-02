@@ -1,12 +1,10 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateReservationDto } from './dto/create-reservation.dto';
 import { UpdateReservationDto } from './dto/update-reservation.dto';
-import { Reservation } from './entities/reservation.entity';
 import { ReservationRepository } from './reservation.repository';
-import { PAYMENT_SERVICE } from '@app/common';
+import { PAYMENT_SERVICE, Reservation, PaymentsCreateChargeDto } from '@app/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { map } from 'rxjs';
-import { PaymentsCreateChargeDto } from 'apps/payments/src/dto/payment-create-charge.dto';
 
 @Injectable()
 export class ReservationService {

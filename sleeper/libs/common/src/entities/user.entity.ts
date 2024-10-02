@@ -2,7 +2,7 @@ import { v4 as uuid } from 'uuid';
 import { randomBytes, pbkdf2Sync } from 'crypto';
 import { BeforeInsert, Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
 import { IsString, IsEmail } from 'class-validator';
-import { Reservation } from 'apps/reservation/src/entities/reservation.entity';
+import { Reservation } from '.';
 
 const generateSalt = (length = 10) => {
     return randomBytes(length).toString('hex');

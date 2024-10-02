@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
-import { Reservation } from './entities/reservation.entity';
+import { Reservation } from '@app/common';
 
 @Injectable()
 export class ReservationRepository {

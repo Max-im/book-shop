@@ -2,12 +2,10 @@ import * as Joi from 'joi';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { DatabaseModule, LoggerModule } from '@app/common';
+import { DatabaseModule, LoggerModule, User, Reservation } from '@app/common';
 import { ReservationService } from './reservation.service';
 import { ReservationController } from './reservation.controller';
-import { Reservation } from './entities/reservation.entity';
 import { ReservationRepository } from './reservation.repository';
-import { User } from 'apps/auth/src/entities/user.entity';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { AUTH_SERVICE, PAYMENT_SERVICE } from '@app/common/constants/services';
 
