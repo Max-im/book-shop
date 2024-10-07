@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  apiKey: secret_value
+kind: Secret
+metadata:
+  name: stripe
+  namespace: default
+  resourceVersion: "217173"
+  uid: some_uuid_value
+type: Opaque

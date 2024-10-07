@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  clientSecret: secret_value
+  refreshToken: secret_value
+kind: Secret
+metadata:
+  name: google
+  namespace: default
+  resourceVersion: "217173"
+  uid: some_uuid_value
+type: Opaque

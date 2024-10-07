@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  jwtSecret: secret_value
+kind: Secret
+metadata:
+  name: jwt
+  namespace: default
+  resourceVersion: "217173"
+  uid: some_uuid_value
+type: Opaque
