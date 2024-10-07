@@ -17,3 +17,27 @@ spec:
       containers:
       - image: us-east-4-docker.pkg.dev/sleeper-378423/reservation/production
         name: reservation
+        env:
+          - name: PORT
+            value: '3004'
+          - name: AUTH_HOST
+            value: auth-tcp
+          - name: AUTH_PORT
+            value: '3003'
+          - name: PAYMENT_HOST
+            value: payments
+          - name: PAYMENT_PORT
+            value: '3001'
+          - name: DB_USER
+            value: postgres
+          - name: DB_PORT
+            value: '5432'
+          - name: DB_PASSWORD
+            value: 'postgres'
+          - name: DB_HOST
+            value: 'localhost'
+          - name: DB_NAME
+            value: 'db_name'
+        ports:
+          - containerPort: 3004
+

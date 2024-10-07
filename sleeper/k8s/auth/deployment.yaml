@@ -17,3 +17,33 @@ spec:
       containers:
       - image: us-east-4-docker.pkg.dev/sleeper-378423/auth/production
         name: auth
+        env:
+          - name: PORT
+            value: '3002'
+          - name: TCP_PORT
+            value: '3003'
+          - name: DB_USER
+            value: postgres
+          - name: DB_PORT
+            value: '5432'
+          - name: DB_PASSWORD
+            value: 'postgres'
+          - name: DB_HOST
+            value: 'localhost'
+          - name: DB_NAME
+            value: 'db_name'
+          - name: JWT_EXPERATION
+            value: '3600'
+          - name: JWT_SECRET_OR_KEY
+            valueFrin:
+              secretKeyRef:
+                name: jwt
+                key: jwtSecret
+        ports:
+          - containerPort: 3002
+          - containerPort: 3003
+
+
+
+
+

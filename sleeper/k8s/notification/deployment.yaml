@@ -17,3 +17,22 @@ spec:
       containers:
       - image: us-east-4-docker.pkg.dev/sleeper-378423/notification/production
         name: notification
+        env:
+          - name: PORT
+            value: '3000'
+          - name: SMTP_USER
+            value: 'username'
+          - name: OAUTH_CLIENT_ID
+            value: 'id_string'
+          - name: OAUTH_CLIENT_SECRET
+            valueFrin:
+              secretKeyRef:
+                name: google
+                key: clientSecret
+          - name: OAUTH_REFRESH_TOKEN
+            valueFrin:
+              secretKeyRef:
+                name: google
+                key: refreshToken
+        ports:
+          - containerPort: 3000
