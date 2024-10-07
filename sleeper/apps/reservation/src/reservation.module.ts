@@ -2,7 +2,7 @@ import * as Joi from 'joi';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { DatabaseModule, LoggerModule, User, Reservation } from '@app/common';
+import { DatabaseModule, LoggerModule, User, Reservation, HealthModule } from '@app/common';
 import { ReservationService } from './reservation.service';
 import { ReservationController } from './reservation.controller';
 import { ReservationRepository } from './reservation.repository';
@@ -47,6 +47,7 @@ import { AUTH_SERVICE, PAYMENT_SERVICE } from '@app/common/constants/services';
                 inject: [ConfigService],
             },
         ]),
+        HealthModule,
     ],
     controllers: [ReservationController],
     providers: [ReservationService, ReservationRepository],

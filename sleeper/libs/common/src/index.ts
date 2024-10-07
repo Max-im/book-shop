@@ -5,3 +5,4 @@ export * from './constants';
 export * from './dto';
 export * from './decorators';
 export * from './entities';
+export * from './health';
