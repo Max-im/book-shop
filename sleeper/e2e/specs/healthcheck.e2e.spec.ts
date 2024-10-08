@@ -1,17 +1,17 @@
 import { ping } from 'tcp-ping';
 
 describe('Healthcheck', () => {
-    describe('Reservation', async () => {
+    it('Reservation', async () => {
         const response = await fetch('http://reservation:3000');
         expect(response.ok).toBeTruthy();
     });
 
-    describe('Auth', async () => {
+    it('Auth', async () => {
         const response = await fetch('http://auth:3001');
         expect(response.ok).toBeTruthy();
     });
 
-    describe('Payments', (done) => {
+    it('Payments', (done) => {
         ping({ address: 'payments', port: 3003 }, (err) => {
             if (err) {
                 fail();
@@ -20,7 +20,7 @@ describe('Healthcheck', () => {
         });
     });
 
-    describe('Notification', (done) => {
+    it('Notification', (done) => {
         ping({ address: 'notification', port: 3004 }, (err) => {
             if (err) {
                 fail();
