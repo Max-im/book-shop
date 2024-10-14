@@ -5,7 +5,7 @@ services:
             dockerfile: ./e2e/Dockerfile
             target: e2e
         volumes:
-            - ./specs:/usr/src/app/specs
+            - ./e2e/specs:/usr/src/app/specs
         depends_on:
             - reservation
             - auth

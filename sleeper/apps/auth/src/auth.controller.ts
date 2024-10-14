@@ -30,7 +30,7 @@ export class AuthController {
             expires,
         });
 
-        return res.json({ success: true });
+        return res.json({ token });
     }
 
     @UseGuards(JwtAuthGuard)

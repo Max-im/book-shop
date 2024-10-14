@@ -10,7 +10,7 @@ export class JwtCommonAuthGuard implements CanActivate {
 
     canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
         const request = context.switchToHttp().getRequest();
-        const jwt = request.cookies?.Authorization;
+        const jwt = request.cookies?.Authorization || request.headers?.authorization;
         if (!jwt) {
             return false;
         }
