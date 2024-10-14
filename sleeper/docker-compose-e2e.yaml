@@ -5,7 +5,7 @@ services:
             dockerfile: ./e2e/Dockerfile
             target: e2e
         volumes:
-            - ./e2e/specs:/usr/src/app/specs
+            - ./specs:/usr/src/app/specs
         depends_on:
             - reservation
             - auth
@@ -72,7 +72,7 @@ services:
         restart: always
         shm_size: 128mb
         ports:
-            - '5433:5432'
+            - '5432:5432'
         environment:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
