@@ -39,4 +39,7 @@ export class User {
 
     @OneToMany(() => Reservation, (reservation) => reservation.user)
     reservations: Reservation[];
+
+    @Column()
+    roles?: string[];
 }
