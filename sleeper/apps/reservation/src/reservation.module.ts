@@ -33,16 +33,22 @@ import { AUTH_SERVICE, PAYMENT_SERVICE } from '@app/common/constants/services';
             {
                 name: AUTH_SERVICE,
                 useFactory: (configService: ConfigService) => ({
-                    transport: Transport.TCP,
-                    options: { host: configService.get('AUTH_HOST'), port: configService.get('AUTH_PORT') },
+                    transport: Transport.RMQ,
+                    options: {
+                        urls: [configService.getOrThrow<string>('RABBITMQ_URL')],
+                        query: 'auth',
+                    },
                 }),
                 inject: [ConfigService],
             },
             {
                 name: PAYMENT_SERVICE,
                 useFactory: (configService: ConfigService) => ({
-                    transport: Transport.TCP,
-                    options: { host: configService.get('PAYMENT_HOST'), port: configService.get('PAYMENT_PORT') },
+                    transport: Transport.RMQ,
+                    options: {
+                        urls: [configService.getOrThrow<string>('RABBITMQ_URL')],
+                        query: 'payments',
+                    },
                 }),
                 inject: [ConfigService],
             },

@@ -16,16 +16,17 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
                 STRIPE_SECRET_KEY: Joi.string().required(),
                 NOTIFICATION_PORT: Joi.number().required(),
                 NOTIFICATION_HOST: Joi.string().required(),
+                RABBITMQ_URL: Joi.string().required(),
             }),
         }),
         ClientsModule.registerAsync([
             {
                 name: NOTIFICATION_SERVICE,
                 useFactory: (configService: ConfigService) => ({
-                    transport: Transport.TCP,
+                    transport: Transport.RMQ,
                     options: {
-                        host: configService.get('NOTIFICATION_HOST'),
-                        port: configService.get('NOTIFICATION_PORT'),
+                        urls: [configService.getOrThrow<string>('RABBITMQ_URL')],
+                        query: 'payments',
                     },
                 }),
                 inject: [ConfigService],
