@@ -14,6 +14,7 @@ async function bootstrap() {
         transport: Transport.RMQ,
         options: {
             urls: [configService.getOrThrow('RABBITMQ_URL')],
+            noAck: false,
             query: 'payments',
         },
     });
